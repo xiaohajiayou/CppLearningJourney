@@ -1,1 +1,2 @@
 # CppLearningJourney
+本仓库用于记录我从新手到进阶的cpp学习过程
