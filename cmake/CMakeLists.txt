@@ -18,7 +18,12 @@ add_library(static_lib ./static_lib.cpp)
 add_library(shared_lib SHARED ./shared_lib.cpp)
 
 # 链接
-target_link_libraries(main ./shared_lib.lib)
+
+# 链接静态库的方式,两种方法等价
+link_directories(./lib)
+target_link_libraries(main static_lib)
+
+link_libraries(./lib/static_lib)
 
 
 # 需要注意的是，在windows中使用visualstudio编译器，编译动态库时，会生成shared.lib和shared.dll
