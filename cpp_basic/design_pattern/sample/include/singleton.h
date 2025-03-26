@@ -1,32 +1,32 @@
 
-class Singleton {
-public:
-    static Singleton& GetInstance();
-private:
-    Singleton();
-    ~Singleton();
+// class Singleton {
+// public:
+//     static Singleton& GetInstance();
+// private:
+//     Singleton();
+//     ~Singleton();
 
-    Singleton(const Singleton &single) = delete;
+//     Singleton(const Singleton &single) = delete;
 
-    const Singleton &operator = (const Singleton &single) = delete;
+//     const Singleton &operator = (const Singleton &single) = delete;
 
-};
+// };
 
-Singleton& Singleton::GetInstance() {
-    static Singleton instance;
-    return instance;
-}
+// Singleton& Singleton::GetInstance() {
+//     static Singleton instance;
+//     return instance;
+// }
 
-Singleton::Singleton() {
-    std::cout<<"构造函数"<<std::endl;
-}
+// Singleton::Singleton() {
+//     std::cout<< "构造函数" <<std::endl;
+// }
 
-Singleton::~Singleton() {
-    std::cout<<"析构函数"<<std::endl;
-}
+// Singleton::~Singleton() {
+//     std::cout<< "析构函数" <<std::endl;
+// }
 
 
-
+namespace singleton {
 
 // c++11之后，静态变量初始化是线程安全的，所以不需要加锁。并且可以通过模版实现通用单例类
 // 模板类，用于实现单例模式
@@ -42,9 +42,9 @@ public:
 
 private:
     // 构造函数私有化，防止外部实例化
-    Singleton() = default;
+    Singleton();
     // 析构函数私有化，防止外部析构
-    ~Singleton() = default;
+    ~Singleton();
 
     // 禁止拷贝构造函数
     Singleton(const Singleton &single) = delete;
@@ -52,3 +52,4 @@ private:
     // 禁止赋值操作符
     const Singleton &operator = (const Singleton &single) = delete;
 };
+}
