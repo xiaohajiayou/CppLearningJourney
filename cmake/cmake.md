@@ -13,7 +13,7 @@ include_directories(./include)
 # 菜名 源文件地址
 add_executable(main ./main.cpp)
 
-#编译静态库和动态库
+# 编译静态库和动态库
 add_library(static_lib ./static_lib.cpp)
 add_library(shared_lib SHARED ./shared_lib.cpp)
 
@@ -28,3 +28,5 @@ link_libraries(./lib/static_lib)
 
 # 需要注意的是，在windows中使用visualstudio编译器，编译动态库时，会生成shared.lib和shared.dll
 # cmake中需要链接.lib，但是需要将.dll放到可执行文件夹活环境变量中。
+![alt text](images/image.png)
+![alt text](images/image-1.png)
