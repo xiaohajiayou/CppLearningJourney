@@ -14,26 +14,24 @@ https://www.bilibili.com/video/BV1Dk4y1j7oj?spm_id_from=333.788.player.switch&vd
 
 
 ## 3. C++是如何工作的
-
+### 实例代码
+分别讲解每句话的作用：
 
 ![](https://i-blog.csdnimg.cn/direct/9035ca97ed16447c857bbacc22e6d24b.png)
 
-`# `后面的是预处理语句，[编译器](https://so.csdn.net/so/search?q=%E7%BC%96%E8%AF%91%E5%99%A8&spm=1001.2101.3001.7020)看到这句，就先处理这个预处理语句，在实际编译发生之前就被处理了。Include的意思，是它需要找到一个文件，然后将这个文件里所有代码拷贝到现在的文件里，通常被叫做头文件。需要这个头文件，我们才能调用这个文件里的函数cout和cin。
+- `# `后面的是预处理语句，编译器看到这句，就先处理这个预处理语句，在实际编译发生之前就被处理了。Include的意思，是它需要找到一个文件，然后将这个文件里所有代码拷贝到现在的文件里，通常被叫做头文件。需要这个头文件，我们才能调用这个文件里的函数cout和cin。
 
-Main函数是程序的入口，当运行程序时，计算机从这个函数开始执行代码，然后程序一行一行地执行代码。Main函数是int型，比较特殊不一定需要返回值；若不返回，系统会默认返回0，这个只对main函数适用。
+- Main函数是程序的入口，当运行程序时，计算机从这个函数开始执行代码，然后程序一行一行地执行代码。Main函数是int型，比较特殊不一定需要返回值；若不返回，系统会默认返回0，这个只对main函数适用。
 
-<< 叫做重载运算符，并没有更多实际意义，可以理解为一个函数，实际上与print函数一样？另一种理解是，将字符串helloworld推送到cout流中，然后打印到终端，然后再推送一个行结束符endl，endl告诉终端跳到下一行。
+- << 叫做重载运算符，并没有更多实际意义，可以理解为一个函数，实际上与print函数一样？另一种理解是，将字符串helloworld推送到cout流中，然后打印到终端，然后再推送一个行结束符endl，endl告诉终端跳到下一行。
+### 开发技巧
+- cin.get函数是等待我们按下enter健，在前往下一句代码之前等待， 这个时候程序暂停执行。而我们已经没有下一行了，所以程序返回0，意味着代码执行完了。
 
-cin.get函数是等待我们按下enter健，在前往下一句代码之前等待， 这个时候程序暂停执行。而我们已经没有下一行了，所以程序返回0，意味着代码执行完了。
+- Ctrl+F7可快速编译当前文件，编译会对每一个C++文件产生一个.obj文件；而build，会对整个项目的c++文件进行编译
 
-Ctrl+F7可快速编译当前文件，编译会对每一个C++文件产生一个.obj文件；而build，会对整个项目的c++文件进行编译
+- Error list部分信息缺失，具体bug调试要看output窗口。
 
-Error list部分信息缺失，具体bug调试要看output窗口。
-
-在C++中，任何的符号都需要声明；需要调用同项目里的函数，需要void这个函数，来让c++知道这个函数是存在的。
-
-[链接器](https://so.csdn.net/so/search?q=%E9%93%BE%E6%8E%A5%E5%99%A8&spm=1001.2101.3001.7020)会找到正确的函数定义在哪，将函数定义导到log函数中，让我们在main.cpp中调用；如果找不到函数定义，将会出现链接错误。链接器无法解析这个符合，链接器的工作是链接函数
-- C++开发中预处理器、编译器、汇编器和链接器的详细分工和作用：
+C++开发中预处理器、编译器、汇编器和链接器的详细分工和作用将在下文具体讲解
 
 
 ## 4. C++预处理器（Preprocessor）是如何工作的
@@ -41,49 +39,197 @@ Error list部分信息缺失，具体bug调试要看output窗口。
 #号之后的语句都是预处理,在编译之前，只是简单的复制拷贝。
 - `#include<iostream>` 预处理器会自动将include包含的头文件中的所有内容，复制粘贴到目标位置。（可通过查看编译后的汇编代码确认这一点）
 - `#ifndefine` 预处理器判断如果没有粘贴才粘贴到目标位置(新版编译器中可以通过#pragma once替代)
+- .i 文件是预处理后的 C 文件，.ii 文件是预处理后的 C++ 文件。
+### 具体例子
+- .i文件通常很大，是因为每个中间文件里都有iostream。
+    `#include<iostream>`，整个预处理文件有6万多行。（里面包含大量的声明、模版和内联，链接器会进行去重优化）
 
-        Obj文件很大，是因为 包含了iostream。我们常用的预处理语句是include，define，if，ifdef，pragma。#include指定了你想要包含的文件，预处理器打开了文件，阅读所有内容，粘贴到你写的文件中。如下，头文件中只有一个“}”，我们就可以把大括号的位置用头文件代替，因为它只是复制黏贴。
+    ![](https://i-blog.csdnimg.cn/direct/3a1c9a1ea283459e968eb90c66cd3067.png)
+- 我们常用的预处理语句是include，define，if，ifdef，pragma。#include指定了你想要包含的文件，预处理器打开了文件，阅读所有内容，粘贴到你写的文件中。
+- 如下，头文件中只有一个“}”，我们就可以把大括号的位置用头文件代替，因为它只是复制黏贴。
 
-![](https://i-blog.csdnimg.cn/direct/a88e4d3c4c114de3859437d12953fcbe.png) ![](https://i-blog.csdnimg.cn/direct/2dc9dd72f5594085891deae87c2b0cff.png)
+    ![](https://i-blog.csdnimg.cn/direct/a88e4d3c4c114de3859437d12953fcbe.png) ![](https://i-blog.csdnimg.cn/direct/2dc9dd72f5594085891deae87c2b0cff.png)
 
-修改预处理器设置把预处理操作可视化，重新编译，会发现一个.i文件。
+    修改预处理器设置把预处理操作可视化，重新编译，会发现一个.i文件。
 
-![](https://i-blog.csdnimg.cn/direct/da3b86416f84470ab03eede82cd22c88.png)![](https://i-blog.csdnimg.cn/direct/377af5c1056844af9ac2a0f183f6535b.png)
+    ![](https://i-blog.csdnimg.cn/direct/da3b86416f84470ab03eede82cd22c88.png)![](https://i-blog.csdnimg.cn/direct/377af5c1056844af9ac2a0f183f6535b.png)
 
-可以看到源码文件中把.h文件中“}”放进来了
+    可以看到源码文件中把.h文件中“}”放进来了
 
-![](https://i-blog.csdnimg.cn/direct/bb22009c4a8a4d30932f6bc92aa86ddd.png)
+    ![](https://i-blog.csdnimg.cn/direct/bb22009c4a8a4d30932f6bc92aa86ddd.png)
 
-#define预处理器只进行搜索INTERGER，并替换为后面的内容，源码正常。
+- #define预处理器只进行搜索INTERGER，并替换为后面的内容，源码正常。
 
-![](https://i-blog.csdnimg.cn/direct/fa7880928584428ea61188611eb57987.png) ![](https://i-blog.csdnimg.cn/direct/4651e2d4bf49440eaf8afcba10d19915.png)
+    ![](https://i-blog.csdnimg.cn/direct/fa7880928584428ea61188611eb57987.png) ![](https://i-blog.csdnimg.cn/direct/4651e2d4bf49440eaf8afcba10d19915.png)
 
-If预处理语句可以让我们包含或排除基于给定条件的代码。
+- If预处理语句可以让我们包含或排除基于给定条件的代码。
 
-![](https://i-blog.csdnimg.cn/direct/3015a37611c0429aae754476555fb0c5.png)
+    ![](https://i-blog.csdnimg.cn/direct/3015a37611c0429aae754476555fb0c5.png)
 
-若改成if 0，VS将会淡出下面的函数，显示这是被禁用的代码；源码中也没有这些代码。
+    若改成if 0，VS将会淡出下面的函数，显示这是被禁用的代码；源码中也没有这些代码。
 
-![](https://i-blog.csdnimg.cn/direct/27ad44f81c624f769ec03798a797424e.png)
+    ![](https://i-blog.csdnimg.cn/direct/27ad44f81c624f769ec03798a797424e.png)
 
-`#include<iostream>`，整个预处理文件有6万多行。
 
-![](https://i-blog.csdnimg.cn/direct/3a1c9a1ea283459e968eb90c66cd3067.png)
 
 ## 5. C++编译器（Compiler）是如何工作的
 
 
-    当预处理完成，我们的文件会被记号化和符号化，将C++语言整理成编译器真正能够理解和推理的格式，也就是所谓的抽象语法树。编译器将我们的代码转换成常量数据或指令，然后开始实际生成代码，这些代码是我们的CPU将执行的代码。 我们还得到了其他各种数据，比如一个存储所有常量，变量的地方。
-- 文件概念
-    - 在编程语言里，对于文件的态度有两种。`java`这种语言区分文件，比如要求文件名必须和类名一致。但`c++`中没有文件概念，编译器只需要知道输入的是什么类型的文件，以及编译器应该如何处理它。例如通过g++或者cmake写编译命令时，指定源文件位置，.cpp文件，C++会把它当成c++文件；.c文件编译器会把.c文件当成C语言文件；.h文件编译器会当成头文件。编译器即可执行编译操作。
-- 翻译单元
-    - 编译器会根据指定的文件路径，分别编译每个文件（cpp文件和预处理加入的代码）为某种中间翻译单元（windows为obj）。
-    - 如果cpp文件中预处理包含其他cpp文件。同样会将其内容复制粘贴，变成一个大的cpp文件，得到一个翻译单元，可能会导致命名重复。这就是为什么在术语上把cpp文件和翻译单元分开。
-- 中间文件
+    预处理阶段是整个编译过程的一个早期步骤，主要负责简单的文本替换。然而，预处理后的代码并不是编译器能够直接理解和推理的格式。编译器需要将预处理后的代码进一步解析为一种更高级的表示形式，这就是所谓的抽象语法树（Abstract Syntax Tree，AST）。以下是对这个过程的详细解释：
 
 
+###  **编译阶段**
+
+编译阶段是将预处理后的代码转换为编译器能够理解和推理的格式。这个过程包括以下几个步骤：
+
+#### **词法分析（Lexical Analysis）**
+
+*   **任务**：将预处理后的代码分解为一系列的记号（tokens）。
+    
+*   **示例**：代码 `int x = 10;` 被分解为 `int`、`x`、`=`、`10`、`;` 等记号。
+    
+
+#### **语法分析（Syntax Analysis）**
+
+*   **任务**：将记号序列解析为抽象语法树（AST）。
+    
+*   **示例**：记号序列 `int x = 10;` 被解析为一个表示变量声明的树结构。
+    
+
+#### **语义分析（Semantic Analysis）**
+
+*   **任务**：检查代码的语义正确性，如类型检查、符号解析等。
+    
+*   **示例**：检查变量 `x` 是否被正确声明，类型是否匹配等。
+    
+
+#### **中间代码生成（Intermediate Code Generation）**
+
+*   **任务**：生成一种中间表示形式（如三地址码），以便后续的优化和代码生成。
+    
+
+### **抽象语法树（AST）**
+
+抽象语法树是编译器用来表示源代码结构的一种树形数据结构。它捕捉了代码的语法结构和语义信息，是编译器进行后续优化和代码生成的基础。
+
+
+###  **示例说明**
+
+假设我们有以下代码：
+
+cpp复制
+
+    #include <iostream>
+    #define MAX 100
+    
+    int main() {
+        int x = MAX;
+        std::cout << x << std::endl;
+        return 0;
+    }
+
+#### **预处理后的代码**
+
+预处理器会将 `#include <iostream>` 和 `#define MAX 100` 展开，生成一个没有预处理指令的纯文本文件：
+
+cpp复制
+
+    int main() {
+        int x = 100;
+        std::cout << x << std::endl;
+        return 0;
+    }
+
+#### **词法分析**
+
+将预处理后的代码分解为记号：
+
+`int, main, (, ), {, int, x, =, 100, ;, std, ::, cout, <<, x, <<, std, ::, endl, ;, return, 0, ;, }`
+
+#### **语法分析**
+
+将记号序列解析为抽象语法树（AST）：
+
+复制
+
+    Program
+    ├── FunctionDeclaration (main)
+    │   ├── Parameters ()
+    │   └── Block
+    │       ├── VariableDeclaration (int x = 100)
+    │       ├── ExpressionStatement (std::cout << x << std::endl)
+    │       └── ReturnStatement (return 0)
+
+#### **语义分析**
+
+检查变量 `x` 的声明和使用是否正确，类型是否匹配等。
+
+#### **中间代码生成**
+
+生成中间表示形式，如三地址码：
+
+
+
+    t1 = 100
+    x = t1
+    t2 = address of std::cout
+    t3 = t2 << x
+    t4 = address of std::endl
+    t5 = t3 << t4
+    t5.flush()
+    return 0
+
+编译器对中间代码进行优化，以提高代码的执行效率。
+优化后的三地址码：
+```plaintext
+    t1 = 100
+    x = t1
+    t2 = address of std::cout
+    t2 << x
+    t2 << std::endl
+    t2.flush()
+    return 0
+```
+
+
+#### 汇编代码生成
+将优化后的中间代码转换为汇编代码。
+```assembly
+section .text
+global main
+
+main:
+    push ebp            ; 保存基指针
+    mov ebp, esp        ; 设置新的基指针
+    sub esp, 4          ; 为局部变量分配栈空间
+
+    mov dword [ebp-4], 100  ; int x = 100
+
+    mov eax, [ebp-4]    ; x
+    push eax
+    push dword [std::cout]  ; std::cout
+    call operator<<     ; std::cout << x
+
+    push dword [std::endl]  ; std::endl
+    push eax
+    call operator<<     ; std::cout << std::endl
+
+    call std::ostream::flush ; std::cout.flush()
+
+    mov eax, 0          ; return 0
+    leave
+    ret
+
+```
+
+
+
+
+## 6. C++汇编器（Assembler）是如何工作的
+
+汇编器（Assembler）是编译过程中的一个关键工具，它将汇编代码（Assembly Code）转换为机器码（Machine Code），并生成目标文件（Object File）。
+- 目标文件
     Obj文件中，是一些人类看不懂的代码。
-
     ![](https://i-blog.csdnimg.cn/direct/e5944c5f6fda4759bced15aa86a32ed5.png)
 
     修改输出文件设置，可以得到汇编语言
@@ -95,89 +241,194 @@ If预处理语句可以让我们包含或排除基于给定条件的代码。
     ![](https://i-blog.csdnimg.cn/direct/23113f603ecb46529d3569a3f114fa44.png)
 
     举了一个log函数的例子，大概意思就是调用log函数会在汇编语言里有一个call，但是log这个函数实际上没有什么用。如果在优化里选择了max 
-- 声明
-    - 编译后生成的翻译单元彼此独立，如果存在某个函数的调用，则需要在调用地进行声明。否则编译器找不到函数定义，会出现编译错误。（**补充具体的错误格式）
 
-## 6. C++汇编器（Assembler）是如何工作的
+以下是汇编器的具体功能和它在编译流程中的作用：
+
+###  **汇编器的基本功能**
+
+汇编器的主要任务是将汇编代码（如 `.s` 文件）转换为机器码，生成目标文件（如 `.obj` 或 `.o` 文件）。汇编代码是低级的、人类可读的代码，而机器码是计算机可以直接执行的二进制代码。
+
+###  **汇编器的输入和输出**
+
+*   **输入**：汇编代码文件（如 `.s` 文件）。
+    
+*   **输出**：目标文件（如 `.obj` 或 `.o` 文件），其中包含机器码和符号信息。
+    
+
+###  **汇编器的作用**
+
+*   **将汇编代码转换为机器码**：汇编器逐行解析汇编代码，将其转换为对应的二进制机器指令。
+    
+*   **生成目标文件**：目标文件包含以下内容：
+    
+    *   **机器码**：计算机可以直接执行的二进制代码。
+        
+    *   **符号表**：包含函数、变量等符号的信息，用于链接阶段。
+        
+    *   **重定位信息**：指示链接器如何调整代码和数据的地址。
+        
+    *   **调试信息**：如果启用了调试选项，目标文件会包含调试信息。
+        
+
+###  **汇编器的工作流程**
+
+1.  **词法分析和语法分析**：解析汇编代码，检查语法错误。
+    
+2.  **代码生成**：将汇编指令转换为对应的机器码。
+    
+3.  **符号表生成**：记录函数、变量等符号的信息。
+    
+4.  **重定位信息生成**：记录需要链接器处理的地址信息。
+    
+
+###  **汇编器的优化**
+
+虽然汇编器本身不进行复杂的优化，但它可以生成高效的机器码。某些高级汇编器可能支持指令调度（Instruction Scheduling）和寄存器分配（Register Allocation）等优化。
+
+
+
+###  **示例说明**
+
+假设我们有以下汇编代码（`.s` 文件）：
+
+assembly复制
+
+    section .text
+    global main
+    
+    main:
+        mov eax, 1          ; 系统调用号 (sys_exit)
+        mov ebx, 0          ; 退出码 0
+        int 0x80            ; 调用内核
+
+#### **汇编器的处理**
+
+1.  **词法分析和语法分析**：检查汇编代码的语法是否正确。
+    
+2.  **代码生成**：将汇编指令转换为机器码：
+    
+    *   `mov eax, 1` → `B8 01 00 00 00`
+        
+    *   `mov ebx, 0` → `BB 00 00 00 00`
+        
+    *   `int 0x80` → `CD 80`
+        
+3.  **生成目标文件**：生成一个包含机器码和符号信息的 `.obj` 或 `.o` 文件。
+    
+
+
+通过汇编器，编译器生成的汇编代码被转换为计算机可以直接执行的机器码，为最终的链接和执行做好准备。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## 7. C++链接器（Linker）是如何工作的
 
 
-        编译完成后，就是链接的过程。链接需要找到每个符合和函数在哪并把它们连接起来。当每个cpp文件被翻译成一个单独的目标文件作为翻译单元，它们彼此之间并没有关系不能交互。当我们把程序分割成多个C++文件，我们需要一种方法把这些文件连接在一起，这就是链接器主要目的和工作。即使文件里没有外部函数，在一个cpp文件中写完整个程序，应用程序仍然需要知道入口（main函数）在哪，所以在实际运行程序时，C++运行库会说，这是main函数，我要跳到这里执行代码，这实际上才是这个应用的起始位置，所以仍需要main函数链接起来。
-
-        在vs中ctrl+F7，仅仅是编译没有链接。只有在bulid项目或F5运行，才会编译，然后链接。如下，一个没有main函数的cpp文件会正常编译；
-
-![](https://i-blog.csdnimg.cn/direct/5d58d36336bd41a695e4045048a9d480.png)
-
-但是build的时候，就会提示以LNK开头的链接错误。
-
-![](https://i-blog.csdnimg.cn/direct/2ea7d7f4a79e4401b914cdbe82d51cfd.png)
-
-而以C开头的，是语法错误。
-
-![](https://i-blog.csdnimg.cn/direct/4fe72aa0dfc348b78ad8b5f5e9ab0c1c.png)
-
-我们需要知道这种不同类型的错误来得知bug出现在哪个阶段来进行修改。绝大多数入口点是main函数，但入口点其实可以自己设置。
-
-故意打错Log函数：
-
-![](https://i-blog.csdnimg.cn/direct/a85562eba4a940629a513eeead985a59.png)
-
-发现原函数仍可以正常编译，因为编译过程确实没问题；
-
-![](https://i-blog.csdnimg.cn/direct/43c673ec6de94c44b0e250a5913ed413.png)
-
-但是会生成一个LNK的错误提示，因为找不到Log函数。
-
-![](https://i-blog.csdnimg.cn/direct/4267f4e99e4748079002a2b12588da98.png)
-
-我们把Log注释掉，发现build正常，因为我们从来没有调用过Log函数。
-
-![](https://i-blog.csdnimg.cn/direct/7b5c79d3dc444eec820d2cde5f95d41c.png)
-
-然而，Log和Multiply函数是嵌套关系，主程序中注释了Multiply函数实际上就不会调用Log函数，但是这个时候还是会提示编译错误。因为虽然这个文件中我们不用Multiply函数，但我们可能会在另一个文件中使用它，所以连接器需要链接它。
-
-![](https://i-blog.csdnimg.cn/direct/f4618f62161e420086f3efc04ef4d2f2.png)
-
-而如果我们告诉链接器，我们只会在这个文件中使用它，我们可以去掉这种连接的必要性，我们可以通过static来实现。
-
-![](https://i-blog.csdnimg.cn/direct/fed1a605f41744a1bd2101ce3cf13799.png)
-
-同样，调用的函数的类型和参数必须与被调用的函数一致，否则同样出现链接问题。
-
-另一种常见的链接错误是重复符号。函数或变量有相同名字和签名，链接器会不知道链接到哪一个。
-
-![](https://i-blog.csdnimg.cn/direct/2c3ddfd1ab8b4bacb1ed78fc78404409.png)
-
-转移下位置，编译是成功的；
-
-![](https://i-blog.csdnimg.cn/direct/b5d67f0bdebe4d10a13d4531f753a75b.png)
-
-但是build就会失败，因为链接器不知道连接哪个Log函数
-
-![](https://i-blog.csdnimg.cn/direct/81dd85b02352413799e19815714bc8e3.png)
-
-一个典型例子：
-
-将Log函数编程一个头文件，然后再Log.cpp和Math.cpp中分别include，在build中发生了连接器错误。这是因为include函数会在两个cpp文件里定义两次Log函数，这样链接器就不知道连接哪个Log函数了。
-
-![](https://i-blog.csdnimg.cn/direct/f36b5409e54049c2bb3f116342ddcf9f.png) ![](https://i-blog.csdnimg.cn/direct/3f7ed15f9aad4a8ab00386b06b8e7c2d.png)
-
-![](https://i-blog.csdnimg.cn/direct/421901ff176e44a89d2d32551acbb344.png)
-
-解决办法是标记Log函数为静态，这意味着在链接Log函数时，Log函数只能是内部函数，这意味着在Math.cpp和Log.cpp中的log函数只能文件的内部函数，它们会有自己版本的log函数，对其他的obj文件都不可见。
-
-![](https://i-blog.csdnimg.cn/direct/844807d57ba54fd2ba57b5f26fac8fea.png)
-
-Inline和定义修改不写了。。。用到再回头学。
-
-
-- 声明与定义绑定
-    - 链接将两者绑定，生成可执行文件或库
+- 文件概念
+    - 在编程语言里，对于文件的态度有两种。`java`这种语言区分文件，比如要求文件名必须和类名一致。但`c++`中没有文件概念，编译器只需要知道输入的是什么类型的文件，以及编译器应该如何处理它。例如通过g++或者cmake写编译命令时，指定源文件位置，.cpp文件，C++会把它当成c++文件；.c文件编译器会把.c文件当成C语言文件；.h文件编译器会当成头文件。编译器即可执行编译操作。
+- 翻译单元
+    - 编译器会根据指定的文件路径，分别编译每个文件（cpp文件和预处理加入的代码）为某种中间翻译单元（windows为obj）。
+    - 如果cpp文件中预处理包含其他cpp文件。同样会将其内容复制粘贴，变成一个大的cpp文件，得到一个翻译单元。这样在链接时，可能会导致命名重复和声明重复。这就是为什么在术语上把cpp文件和翻译单元分开，且声明和实现分开的原因。
 - 定义的位置
     - 还记得`#include`的的原理吗？只是简单的复制粘贴，如果我们把函数的定义写在头文件里，然后在多个翻译单元里引用这个头文件，这个实现则会被拷贝多份。这种情况编译不会出错，但是链接器会报错多重定义。
     - 所以如果一定要把定义放在头文件，需要加`static`或`inline`
     - 通常建议把声明放在`.h`头文件，实现放在`.cpp`源文件中
+
+### 链接过程
+- 编译完成后，就是链接的过程。链接需要找到每个符号和函数在哪，并把它们连接起来。
+当每个cpp文件被翻译成一个单独的目标文件作为翻译单元，它们彼此之间并没有关系不能交互，我们需要一种方法把这些文件连接在一起，这就是链接器主要目的和工作。
+- 即使文件里没有外部函数，在一个cpp文件中写完整个程序，应用程序仍然需要知道入口（main函数）在哪，所以在实际运行程序时，main函数还是这个应用的起始位置
+
+- 在vs中ctrl+F7，仅仅是编译没有链接。只有在bulid项目或F5运行，才会编译，然后链接。如下，一个没有main函数的cpp文件会正常编译；
+
+    ![](https://i-blog.csdnimg.cn/direct/5d58d36336bd41a695e4045048a9d480.png)
+
+    但是build的时候，就会提示以LNK开头的链接错误。
+
+    ![](https://i-blog.csdnimg.cn/direct/2ea7d7f4a79e4401b914cdbe82d51cfd.png)
+
+- 编译error以C开头的，是语法错误。
+
+    ![](https://i-blog.csdnimg.cn/direct/4fe72aa0dfc348b78ad8b5f5e9ab0c1c.png)
+
+    了解不同类型的编译错误标志，有助于得知bug出现在哪个阶段。
+
+####  链接错误的例子：
+- 故意打错Log函数：
+
+    ![](https://i-blog.csdnimg.cn/direct/a85562eba4a940629a513eeead985a59.png)
+
+    发现原函数仍可以正常编译，因为编译过程确实没问题；
+
+    ![](https://i-blog.csdnimg.cn/direct/43c673ec6de94c44b0e250a5913ed413.png)
+
+    但是在其他翻译单元调用该函数时，链接器会生成一个LNK的错误提示，因为找不到Log函数。
+
+    ![](https://i-blog.csdnimg.cn/direct/4267f4e99e4748079002a2b12588da98.png)
+
+    我们把Log注释掉，发现build正常。因为翻译单元不存在调用需求链接器不需要找Log函数了。
+
+    ![](https://i-blog.csdnimg.cn/direct/7b5c79d3dc444eec820d2cde5f95d41c.png)
+
+- 注释外部函数
+Log和Multiply函数是嵌套关系，虽然主程序中注释了Multiply函数，实际上就不会调用Log函数。但是这个时候，翻译单元中还是存在调用关系，还是会提示编译错误。因为虽然这个文件中我们不用Multiply函数，但我们可能会在另一个文件中引用并使用它，所以连接器需要链接它。
+
+    ![](https://i-blog.csdnimg.cn/direct/f4618f62161e420086f3efc04ef4d2f2.png)
+
+    而如果我们告诉链接器，我们只会在这个文件中使用它，我们可以去掉这种链接的必要性，我们可以通过static来实现。
+
+    ![](https://i-blog.csdnimg.cn/direct/fed1a605f41744a1bd2101ce3cf13799.png)
+
+    同样，调用的函数的类型和参数必须与被调用的函数一致，否则同样出现链接问题。
+
+- 另一种常见的链接错误是重复符号。函数或变量有相同名字和签名，链接器会不知道链接到哪一个。
+
+    ![](https://i-blog.csdnimg.cn/direct/2c3ddfd1ab8b4bacb1ed78fc78404409.png)
+
+    转移下位置，编译是成功的；
+
+    ![](https://i-blog.csdnimg.cn/direct/b5d67f0bdebe4d10a13d4531f753a75b.png)
+
+    但是build就会失败，因为链接器不知道连接哪个Log函数
+
+    ![](https://i-blog.csdnimg.cn/direct/81dd85b02352413799e19815714bc8e3.png)
+
+    一个典型例子：
+
+    将Log函数编程一个头文件，然后再Log.cpp和Math.cpp中分别include，在build中发生了连接器错误。这是因为include函数会在两个cpp文件里定义两次Log函数，这样链接器就不知道连接哪个Log函数了。
+
+    ![](https://i-blog.csdnimg.cn/direct/f36b5409e54049c2bb3f116342ddcf9f.png) ![](https://i-blog.csdnimg.cn/direct/3f7ed15f9aad4a8ab00386b06b8e7c2d.png)
+
+    ![](https://i-blog.csdnimg.cn/direct/421901ff176e44a89d2d32551acbb344.png)
+
+    解决办法是标记Log函数为静态，这意味着在链接Log函数时，Log函数只能是内部函数，这意味着在Math.cpp和Log.cpp中的log函数只能文件的内部函数，它们会有自己版本的log函数，对其他的obj文件都不可见。
+
+    ![](https://i-blog.csdnimg.cn/direct/844807d57ba54fd2ba57b5f26fac8fea.png)
+
+Inline和定义修改不写了。。。用到再回头学。
+
+
+
 
 
 ## 8. C++变量
