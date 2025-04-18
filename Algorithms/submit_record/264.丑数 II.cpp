@@ -48,25 +48,29 @@
 class Solution {
 public:
     int nthUglyNumber(int n) {
-        set<int> st;
-        st.insert(1);
-        for(auto b:st) {
-            for(int c:num) {
-                st.insert(c*b);
+        int p2 = 1,p3 =1,p5 = 1;
+        int pr2 = 1,pr3 =1,pr5 = 1;
+        vector<int> vec(n+1);
+        int p = 1;
+        while(p<=n) {
+            int min_v = min({pr2,pr3,pr5});
+            vec[p]=min_v;
+            p++;
+            if(pr2==min_v) {
+                pr2 = vec[p2]*2;
+                p2++;
+            } 
+            if(pr3==min_v) {
+                pr3 = vec[p3]*3;
+                p3++;
+            }
+            if(pr5==min_v) {
+                pr5 = vec[p5]*5;
+                p5++;
             }
         }
-        // vector<int> result(st.begin(),st.end());
-        // sort(result.begin(),result.end());
-        // return result[n-1];
-
-         // 直接从集合中获取第 n 个元素
-         auto it = st.begin();
-         std::advance(it, n - 1); // 移动到第 n 个元素
-         return *it; // 返回第 n 个丑数
+        return vec[n];
     }
-private:
-    vector<int> num = {2,3,5};
-    
 };
 // @lc code=end
 
