@@ -57,15 +57,15 @@ public:
     int coinChange(vector<int>& coins, int amount) {
         vector<int> dp(amount+1,INT_MAX/2);
         dp[0] = 0;
+        for(int i = 0;i<=amount;i++) {
+            for(int j = 0;j<coins.size();j++) {
 
-        for(int j = 0;j<coins.size();j++) {
-            for(int i = j;i<=amount;i++) {
                 int tmp =i-coins[j];
                 if(tmp<0) continue;
                 dp[i] = min(dp[i],dp[tmp]+1);
             }
         }
-        return dp[amount]>INT_MAX/2? -1:dp[amount];
+        return dp[amount]>=INT_MAX/2? -1:dp[amount];
     }
 };
 // @lc code=end
