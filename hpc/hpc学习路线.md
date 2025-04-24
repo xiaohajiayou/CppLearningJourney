@@ -36,7 +36,8 @@ https://www.bilibili.com/video/BV1kx411m7Fk/?spm_id_from=333.337.search-card.all
 - 如果是大模型部署和推理优化的话，感觉还需要了解一点fastertransformer、flashattention和vllm之类的框架
 - 推理框架优化（内存优化、分层框架）、算子优化（cvpr最新算子支持，插件实现、异构推理）方向     
 
-
+### nndeploy
+https://nndeploy-zh.readthedocs.io/zh/latest/discussion/discussion.html
 
 
 ### ggml
