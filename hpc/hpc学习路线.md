@@ -74,7 +74,12 @@ https://blog.csdn.net/weixin_42479327/article/details/141496484
 
 
 
-
+### 一生一芯
+#### NJU-ICS2021-PA
+- 官方文档
+https://nju-projectn.github.io/ics-pa-gitbook/ics2023/index.html
+- 通关教程
+https://langyiqun.github.io/2024/02/26/PA%E9%80%9A%E5%85%B3-pa0/
 
 
 
