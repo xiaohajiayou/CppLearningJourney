@@ -38,7 +38,8 @@ https://www.bilibili.com/video/BV1kx411m7Fk/?spm_id_from=333.337.search-card.all
 
 ### nndeploy
 https://nndeploy-zh.readthedocs.io/zh/latest/discussion/discussion.html
-
+- 整体在多种主流的推理框架上做了封装层
+- 可以从mac的编译和适配入手做贡献
 
 ### ggml
 
