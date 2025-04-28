@@ -59,39 +59,35 @@
 class Solution {
 public:
     int fun(vector<int>& nums, int cap) {
-        int cnt = 0;
+        // cout<<cap<<endl;
         int tmp = cap;
-        for(int i = 0;i<nums.size();i++) {
-
-            if(tmp<nums[i]) {
+        int cnt = 0;
+        for(int i = 0; i<nums.size(); i++) {
+            tmp-=nums[i];
+            if (tmp<0) {
                 cnt++;
-                tmp = cap - nums[i];
-            } else if(tmp == nums[i]) {
+                tmp = cap-nums[i];
+            } else if(tmp == 0) {
                 cnt++;
                 tmp = cap;
-            } else {
-                tmp-=nums[i];
             }
         }
-        if (tmp < cap) {
-            cnt++;
-        }
+        if(tmp<cap) cnt++;
         return cnt;
     }
     int splitArray(vector<int>& nums, int k) {
         int left = 0, right = 0;
-        for(auto m:nums) {
-            left = max(left,m);
-            right +=m;
+        for(auto c:nums) {
+            left = max(left,c);
+            right+=c;
         }
-
         while(left<right) {
-            int mid = left + (right-left)/2;
+            int mid = left+(right-left)/2;
             int tmp = fun(nums,mid);
-            if(tmp >k) {
-                left = mid +1;
-            } else if(tmp<=k) {
+            if(tmp<=k) {
                 right = mid;
+            } else if(tmp>k) {
+                left = mid+1;
             }
         }
         return left;
