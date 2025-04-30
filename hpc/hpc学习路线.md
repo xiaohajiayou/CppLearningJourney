@@ -40,6 +40,9 @@ https://www.bilibili.com/video/BV1kx411m7Fk/?spm_id_from=333.337.search-card.all
 https://nndeploy-zh.readthedocs.io/zh/latest/discussion/discussion.html
 - 整体在多种主流的推理框架上做了封装层
 - 可以从mac的编译和适配入手做贡献
+- rv1126兼容
+  接口说明：https://blog.csdn.net/kxh123456/article/details/129370265
+- detection和getGlobaCreatelDecodeNodeFuncMap 书写错误
 
 ### ggml
 
@@ -84,7 +87,7 @@ https://zhuanlan.zhihu.com/p/654821469
 - https://zhuanlan.zhihu.com/p/11438556321
 - 《通用图形处理器设计:GPGPU编程模型与架构原理》
 - CUDA C Programming Guide（https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html）
-
+- gpu发展历史： https://zhuanlan.zhihu.com/p/357112957
 
 
 ### 一生一芯
