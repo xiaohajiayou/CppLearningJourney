@@ -55,20 +55,23 @@ https://blog.csdn.net/weixin_42479327/article/details/141496484
 ![alt text](images/image-1.png)
 
 
-## 硬件相关
+## 海外课程相关
+https://www.learncs.site/docs/roadmap
 ### 计算机体系结构
 - 一个是[计算机体系结构]。
   这个领域很基础，但对理解AI Infra的性能优化至关重要，尤其是像GPU、[TPU]、[ASIC]这些硬件的设计思路和架构原理。经典的书有《Computer Architecture: A Quantitative Approach》，然后再结合实际了解NVIDIA的GPU白皮书、CUDA文档，把理论和实践结合起来。
   - 计算机组成原理课程：UCB-CS61C
-    https://link.zhihu.com/?target=https%3A//www.bilibili.com/video/BV1fC4y147iZ%3Fspm_id_from%3D333.337.search-card.all.click
-  
+    https://www.bilibili.com/video/BV1fC4y147iZ/?spm_id_from=333.337.search-card.all.click&vd_source=09dab0452e2548023f6f83174148ee0c
+    实验:https://github.com/61c-teach
   - 计算机体系结构可能： UCB-CS152
-    https://link.zhihu.com/?target=https%3A//www.bilibili.com/video/BV1pK4y1d7ff%3Fp%3D1%26vd_source%3D24a420d00426dd75084e83baa33680ab
+    https://www.bilibili.com/video/BV1pK4y1d7ff?vd_source=24a420d00426dd75084e83baa33680ab
 - 第二个是分布式系统和并行计算。
   AI Infra的大模型训练基本都要跑在多机多卡甚至超大规模集群上，分布式计算的核心理念必须掌握，比如数据并行、模型并行、分布式存储、RPC（远程过程调用）等。可以从[《Distributed Systems》]这类经典书入门，再去实践框架，比如[PyTorch]的分布式训练（DDP）或者NVIDIA的 NCCL库。你甚至可以深入研究像[Ray]、[Horovod]这样的分布式框架。
 - 俄亥俄州立大学张晓东教授关于系统结构的论文，可以更加深入理解系统结构背后的几个基本思想
   个人觉得系统结构最后主要抽象为几个关键的系统思想，流水、并行、latency hidden、locality、consistency/conherence、memory hierarchy等等，不仅仅要试图去理解几个概念是什么，更重要的去思考在多核/单核处理器设计、计算机板级设计、计算机板级+disk设计、计算机与计算机之间的协同计算、广义的internet里的计算机之间的读写访问、idc 强调鲁棒性分布式系统的设计、idc强调并行计算的高性能计算系统设计，还有一些应用基础系统软件的设计，它们背后在性能维度都跟系统结构里几个量化分析的基本思想逃离不开
 
+- AI芯片设计
+https://www.bilibili.com/video/BV1vT421v7eQ/?spm_id_from=333.1387.upload.video_card.click&vd_source=09dab0452e2548023f6f83174148ee0c
 ### 编译原理
 
 
