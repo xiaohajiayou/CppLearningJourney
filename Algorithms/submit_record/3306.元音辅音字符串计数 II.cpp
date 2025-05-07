@@ -81,35 +81,10 @@
 class Solution { 
 public:
     long long func(string word, int k) {
-        unordered_map<char,int> mp;
-        int count_e = 0,count = 0;
-        int i = 0,j =0;
-        long long result = 0;
-        for(i;i<word.size();i++) {
-            int tmp = word[i];
-            if(st.find(tmp)!=st.end()) {
-                mp[tmp]++;
-            } else {
-                count++;
-            }
-            while(mp.size()==5&& count>=k) {
-                int tmp2 = word[j];
-                if(st.find(tmp2)!=st.end()) {
-                    if(--mp[tmp2]==0) {
-                        mp.erase(tmp2);
-                    }
 
-                } else {
-                    count--;
-                }
-                j++;
-            }
-            result += j;
-        }
-        return result;
     }
     long long countOfSubstrings(string word, int k) {
-        return func(word,k)-func(word,k+1);
+        return   func(word,k) - func(word,k+1);
     }
 
 private:

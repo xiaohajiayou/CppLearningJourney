@@ -77,21 +77,7 @@
 class Solution {
 public:
     vector<int> getAverages(vector<int>& nums, int k) {
-        int r = 2 * k + 1;
-        long  cnt = 0;
-        vector<int> result(nums.size(),-1);
-        for(int i = 0; i<nums.size(); i++) {
-            if (i<=(r-2)) {
-                cnt+=nums[i];
-                continue;
-            } 
-            cnt+=nums[i];
-            result[i-k] = cnt/r;
 
-            cnt-=nums[i-r+1];
-            
-        }
-        return result;
     }
 };
 // @lc code=end
