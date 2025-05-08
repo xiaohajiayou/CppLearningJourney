@@ -329,7 +329,7 @@ file(GLOB MAIN_HEAD "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h")
 
 通过这种方式，`find_package` 可以灵活地找到库的配置文件，而用户可以通过设置特定的变量（如 `<PackageName>_DIR`）来明确指定库的路径。
 
-### f搜索库
+### 搜索库
 
 `find_library` 是 CMake 中用于查找库文件的命令，与 `find_package` 不同，`find_library` 直接查找动态库或静态库文件（如 `.so`、`.a`、`.dll` 等）。它的主要作用是帮助项目找到特定的库文件，并将其路径存储在一个变量中，供后续的链接操作使用。
 
