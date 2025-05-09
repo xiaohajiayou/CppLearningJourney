@@ -42,7 +42,7 @@ https://nndeploy-zh.readthedocs.io/zh/latest/discussion/discussion.html
 - 可以从mac的编译和适配入手做贡献
 - rv1126兼容
   接口说明：https://blog.csdn.net/kxh123456/article/details/129370265
-- detection和getGlobaCreatelDecodeNodeFuncMap 书写错误
+
 
 ### ggml
 
