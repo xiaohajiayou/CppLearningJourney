@@ -48,12 +48,28 @@ https://nndeploy-zh.readthedocs.io/zh/latest/discussion/discussion.html
 
 ### llama.cpp
 https://www.bilibili.com/video/BV1Ez4y1w7fc/?spm_id_from=333.337.search-card.all.click&vd_source=09dab0452e2548023f6f83174148ee0c
+
+- 多模态输入
+https://mp.weixin.qq.com/s?__biz=MzA3ODUzNjExOA==&mid=2649704366&idx=1&sn=191a7db63b687e473ae47977ff396242&poc_token=HFo6JGijlJa7ldJRvYkBfnXPwz1ERGhpinfh_YYT
 ### vllm
 
 https://blog.csdn.net/weixin_42479327/article/details/141496484
 
 ![alt text](images/image-1.png)
 
+
+## 比赛
+- 天池比赛 大模型软硬系统优化赛道
+https://tianchi.aliyun.com/competition/aillmList
+https://tianchi.aliyun.com/competition/entrance/532289?spm=a2c22.29524702.0.0.7e923b74wM9Utp
+  - 方案：
+    https://datawhaler.feishu.cn/wiki/SuppwSfFZi5KvYkiffUcygVNnPe
+    https://blog.csdn.net/m0_63566347/article/details/140525867
+    https://github.com/IEEE-AICAS/AICAS2025_GC?spm=a2c22.12281976.0.0.59d95e129Da2wF
+- 算法赛道
+https://tianchi.aliyun.com/competition/entrance/532251/forum?spm=a2c6h.12873639.article-detail.6.1ca7cdfdT6dc7O
+https://tianchi.aliyun.com/forum/post/784927
+https://github.com/TRT2022/ControlNet_TensorRT
 
 ## 海外课程相关
 https://www.learncs.site/docs/roadmap
