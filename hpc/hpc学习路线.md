@@ -4,7 +4,8 @@
 - 算子层：熟悉常用的卷积计算优化方法：gemm、winograd算法
 - 编译层：TVM/MLIR/IREE
 - 算法层：了解主流AIGC算法模型原理
-- 框架层：开源推理框架贡献：DeepSpeed，FasterTransformer、vllm、lmdeploy、ncnn、tensorRT
+- 推理框架层：开源推理框架贡献：DeepSpeed，FasterTransformer、vllm、lmdeploy、ncnn、tensorRT
+- 训练框架层：mpi、rdma、gpu direct
 - 汇编层： arm neon指令、汇编优化、GPU优化
 
 - 熟悉常用图像视觉计算库及深度学习推理计算库：arm compute library
@@ -29,6 +30,7 @@ https://www.cnblogs.com/orion-orion/p/15376727.html
 https://www.bilibili.com/video/BV1kx411m7Fk/?spm_id_from=333.337.search-card.all.click&vd_source=09dab0452e2548023f6f83174148ee0c
 #### 实战
 可以试试用cuda实现reduce/histogram/softmax/gemm/scan/sort之类的算法，尤其是gemm，感觉高性能计算方向大概率会问，知乎上也有很多大佬写的文章可以参考，cuda core和tensor core的实现都有。（如果都实现过了，当我没说...   
+
 
 
 ## 推理框架
