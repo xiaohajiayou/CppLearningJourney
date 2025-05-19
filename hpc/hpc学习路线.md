@@ -51,6 +51,13 @@ https://www.bilibili.com/video/BV1Ez4y1w7fc/?spm_id_from=333.337.search-card.all
 
 - 多模态输入
 https://mp.weixin.qq.com/s?__biz=MzA3ODUzNjExOA==&mid=2649704366&idx=1&sn=191a7db63b687e473ae47977ff396242&poc_token=HFo6JGijlJa7ldJRvYkBfnXPwz1ERGhpinfh_YYT
+
+
+### paddlelite
+官网资料
+https://pfcc.blog/posts/newcomers-manual
+github活动
+https://github.com/PaddlePaddle/Paddle/issues/56689
 ### vllm
 
 https://blog.csdn.net/weixin_42479327/article/details/141496484
