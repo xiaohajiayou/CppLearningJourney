@@ -4,7 +4,8 @@
 - 算子层：熟悉常用的卷积计算优化方法：gemm、winograd算法
 - 编译层：TVM/MLIR/IREE
 - 算法层：了解主流AIGC算法模型原理
-- 框架层：开源推理框架贡献：DeepSpeed，FasterTransformer、vllm、lmdeploy、ncnn、tensorRT
+- 推理框架层：开源推理框架贡献：DeepSpeed，FasterTransformer、vllm、lmdeploy、ncnn、tensorRT
+- 训练框架层：mpi、rdma、gpu direct
 - 汇编层： arm neon指令、汇编优化、GPU优化
 
 - 熟悉常用图像视觉计算库及深度学习推理计算库：arm compute library
@@ -31,18 +32,34 @@ https://www.bilibili.com/video/BV1kx411m7Fk/?spm_id_from=333.337.search-card.all
 可以试试用cuda实现reduce/histogram/softmax/gemm/scan/sort之类的算法，尤其是gemm，感觉高性能计算方向大概率会问，知乎上也有很多大佬写的文章可以参考，cuda core和tensor core的实现都有。（如果都实现过了，当我没说...   
 
 
+
 ## 推理框架
  
 - 如果是大模型部署和推理优化的话，感觉还需要了解一点fastertransformer、flashattention和vllm之类的框架
 - 推理框架优化（内存优化、分层框架）、算子优化（cvpr最新算子支持，插件实现、异构推理）方向     
 
-
+### nndeploy
+https://nndeploy-zh.readthedocs.io/zh/latest/discussion/discussion.html
+- 整体在多种主流的推理框架上做了封装层
+- 可以从mac的编译和适配入手做贡献
+- rv1126兼容
+  接口说明：https://blog.csdn.net/kxh123456/article/details/129370265
 
 
 ### ggml
 
 ### llama.cpp
 https://www.bilibili.com/video/BV1Ez4y1w7fc/?spm_id_from=333.337.search-card.all.click&vd_source=09dab0452e2548023f6f83174148ee0c
+
+- 多模态输入
+https://mp.weixin.qq.com/s?__biz=MzA3ODUzNjExOA==&mid=2649704366&idx=1&sn=191a7db63b687e473ae47977ff396242&poc_token=HFo6JGijlJa7ldJRvYkBfnXPwz1ERGhpinfh_YYT
+
+
+### paddlelite
+官网资料
+https://pfcc.blog/posts/newcomers-manual
+github活动
+https://github.com/PaddlePaddle/Paddle/issues/56689
 ### vllm
 
 https://blog.csdn.net/weixin_42479327/article/details/141496484
@@ -50,14 +67,42 @@ https://blog.csdn.net/weixin_42479327/article/details/141496484
 ![alt text](images/image-1.png)
 
 
-## 硬件相关
+## 比赛
+- 天池比赛 大模型软硬系统优化赛道
+https://tianchi.aliyun.com/competition/aillmList
+https://tianchi.aliyun.com/competition/entrance/532289?spm=a2c22.29524702.0.0.7e923b74wM9Utp
+  - 方案：
+    https://datawhaler.feishu.cn/wiki/SuppwSfFZi5KvYkiffUcygVNnPe
+    https://blog.csdn.net/m0_63566347/article/details/140525867
+    https://github.com/IEEE-AICAS/AICAS2025_GC?spm=a2c22.12281976.0.0.59d95e129Da2wF
+- 算法赛道
+https://tianchi.aliyun.com/competition/entrance/532251/forum?spm=a2c6h.12873639.article-detail.6.1ca7cdfdT6dc7O
+https://tianchi.aliyun.com/forum/post/784927
+https://github.com/TRT2022/ControlNet_TensorRT
+
+## 海外课程相关
+https://www.learncs.site/docs/roadmap
 ### 计算机体系结构
-- 一个是[计算机体系结构](https://zhida.zhihu.com/search?content_id=700923002&content_type=Answer&match_order=1&q=%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84&zhida_source=entity)。
-  这个领域很基础，但对理解AI Infra的性能优化至关重要，尤其是像GPU、[TPU](https://zhida.zhihu.com/search?content_id=700923002&content_type=Answer&match_order=1&q=TPU&zhida_source=entity)、[ASIC](https://zhida.zhihu.com/search?content_id=700923002&content_type=Answer&match_order=1&q=ASIC&zhida_source=entity)这些硬件的设计思路和架构原理。经典的书有《Computer Architecture: A Quantitative Approach》，然后再结合实际了解NVIDIA的GPU白皮书、CUDA文档，把理论和实践结合起来。
+- 一个是[计算机体系结构]。
+  这个领域很基础，但对理解AI Infra的性能优化至关重要，尤其是像GPU、[TPU]、[ASIC]这些硬件的设计思路和架构原理。经典的书有《Computer Architecture: A Quantitative Approach》，然后再结合实际了解NVIDIA的GPU白皮书、CUDA文档，把理论和实践结合起来。
+  - 计算机组成原理课程：UCB-CS61C
+    https://www.bilibili.com/video/BV1fC4y147iZ/?spm_id_from=333.337.search-card.all.click&vd_source=09dab0452e2548023f6f83174148ee0c
+    实验:https://github.com/61c-teach
+  - 计算机体系结构可能： UCB-CS152
+    https://www.bilibili.com/video/BV1pK4y1d7ff?vd_source=24a420d00426dd75084e83baa33680ab
 - 第二个是分布式系统和并行计算。
-  AI Infra的大模型训练基本都要跑在多机多卡甚至超大规模集群上，分布式计算的核心理念必须掌握，比如数据并行、模型并行、分布式存储、RPC（远程过程调用）等。可以从[《Distributed Systems》](https://zhida.zhihu.com/search?content_id=700923002&content_type=Answer&match_order=1&q=%E3%80%8ADistributed+Systems%E3%80%8B&zhida_source=entity)这类经典书入门，再去实践框架，比如[PyTorch](https://zhida.zhihu.com/search?content_id=700923002&content_type=Answer&match_order=1&q=PyTorch&zhida_source=entity)的分布式训练（DDP）或者NVIDIA的 NCCL库。你甚至可以深入研究像[Ray](https://zhida.zhihu.com/search?content_id=700923002&content_type=Answer&match_order=1&q=Ray&zhida_source=entity)、[Horovod](https://zhida.zhihu.com/search?content_id=700923002&content_type=Answer&match_order=1&q=Horovod&zhida_source=entity)这样的分布式框架。
+  AI Infra的大模型训练基本都要跑在多机多卡甚至超大规模集群上，分布式计算的核心理念必须掌握，比如数据并行、模型并行、分布式存储、RPC（远程过程调用）等。可以从[《Distributed Systems》]这类经典书入门，再去实践框架，比如[PyTorch]的分布式训练（DDP）或者NVIDIA的 NCCL库。你甚至可以深入研究像[Ray]、[Horovod]这样的分布式框架。
+- 俄亥俄州立大学张晓东教授关于系统结构的论文，可以更加深入理解系统结构背后的几个基本思想
+  个人觉得系统结构最后主要抽象为几个关键的系统思想，流水、并行、latency hidden、locality、consistency/conherence、memory hierarchy等等，不仅仅要试图去理解几个概念是什么，更重要的去思考在多核/单核处理器设计、计算机板级设计、计算机板级+disk设计、计算机与计算机之间的协同计算、广义的internet里的计算机之间的读写访问、idc 强调鲁棒性分布式系统的设计、idc强调并行计算的高性能计算系统设计，还有一些应用基础系统软件的设计，它们背后在性能维度都跟系统结构里几个量化分析的基本思想逃离不开
+
+- AI芯片设计
+https://www.bilibili.com/video/BV1vT421v7eQ/?spm_id_from=333.1387.upload.video_card.click&vd_source=09dab0452e2548023f6f83174148ee0c
+### 编译原理
+
 
 ### 芯片体系架构
+#### 自学路线
+https://zhuanlan.zhihu.com/p/654821469
 #### cpu架构
 - 学习常见的芯片架构，如x86架构、ARM架构等，了解它们的特点、优势及适用场景。
 - 学会使用性能分析工具（如Intel VTune、Linux perf等）对指令执行pipeline进行分析，找出瓶颈并进行优化
@@ -70,10 +115,15 @@ https://blog.csdn.net/weixin_42479327/article/details/141496484
 - https://zhuanlan.zhihu.com/p/11438556321
 - 《通用图形处理器设计:GPGPU编程模型与架构原理》
 - CUDA C Programming Guide（https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html）
+- gpu发展历史： https://zhuanlan.zhihu.com/p/357112957
 
 
-
-
+### 一生一芯
+#### NJU-ICS2021-PA
+- 官方文档
+https://nju-projectn.github.io/ics-pa-gitbook/ics2023/index.html
+- 通关教程
+https://langyiqun.github.io/2024/02/26/PA%E9%80%9A%E5%85%B3-pa0/
 
 
 

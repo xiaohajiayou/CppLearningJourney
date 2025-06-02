@@ -47,11 +47,33 @@
 // @lc code=start
 class Solution {
 public:
+    void backtrace(vector<int>& nums , vector<int> used) {
+        if(path.size() == nums.size()) {
+            result.push_back(path);
+            return ;
+        }
 
+        for(int i = 0;i<nums.size();i++) {
+            if(used[i]!=-1) continue;
+            if(i>0 && used[i-1]==-1 && nums[i-1] == nums[i]) continue;
+            used[i] = 1;
+            path.push_back(nums[i]);
+            backtrace(nums,used);
+            path.pop_back();
+            used[i] = -1;
+        }
+        
+    }
     vector<vector<int>> permuteUnique(vector<int>& nums) {
-
+        sort(nums.begin(), nums.end());
+        vector<int> used(nums.size(),-1);
+        backtrace(nums,used);
+        return result;
     }
 
+private:
+    vector<int> path;
+    vector<vector<int>> result;
 };
 // @lc code=end
 

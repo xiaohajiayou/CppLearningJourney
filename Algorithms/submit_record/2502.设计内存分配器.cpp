@@ -84,17 +84,37 @@
 class Allocator {
 public:
     Allocator(int n) {
-
+        vec.resize(n);
         
     }
     
     int allocate(int size, int mID) {
-        
+        int cnt = 0;
+
+        for(int i = 0;i<vec.size();i++) {
+            if(vec[i] == 0) {
+                cnt++;
+                if(cnt == size) {
+                    fill(vec.begin()+i-size+1,vec.begin()+i+1,mID);
+                    return i-size+1;
+                }
+            } else {
+                cnt = 0;
+            }
+        }
+        return -1;
 
     }
     
     int freeMemory(int mID) {
-
+        int cnt = 0;
+        for(int i = 0;i<vec.size();i++) {
+            if(vec[i]==mID) {
+                cnt++;
+                vec[i] = 0;
+            }
+        }
+        return cnt;
     }
 private:
     vector<int> vec;

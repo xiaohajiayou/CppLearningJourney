@@ -48,28 +48,21 @@
 class Solution {
 public:
     int nthUglyNumber(int n) {
-        int p2 = 1,p3 =1,p5 = 1;
-        int pr2 = 1,pr3 =1,pr5 = 1;
-        vector<int> vec(n+1);
+        vector<int> ugly(n+1,1) ;
+        int p2 = 0, p3 = 0, p5 = 0;
         int p = 1;
-        while(p<=n) {
-            int min_v = min({pr2,pr3,pr5});
-            vec[p]=min_v;
+        for(int i = 0; i<n; i++) {
+
+            int mini = min({ugly[p2]*2,ugly[p3]*3,ugly[p5]*5});
+            ugly[p] = mini;
             p++;
-            if(pr2==min_v) {
-                pr2 = vec[p2]*2;
-                p2++;
-            } 
-            if(pr3==min_v) {
-                pr3 = vec[p3]*3;
-                p3++;
-            }
-            if(pr5==min_v) {
-                pr5 = vec[p5]*5;
-                p5++;
-            }
+            if(mini == ugly[p2]*2) p2++;
+            if(mini == ugly[p3]*3) p3++;
+            if(mini == ugly[p5]*5) p5++;
         }
-        return vec[n];
+
+        return ugly[n-1];
+
     }
 };
 // @lc code=end

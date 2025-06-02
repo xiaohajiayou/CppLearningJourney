@@ -78,39 +78,18 @@
  */
 
 // @lc code=start
-class Solution {
+class Solution { 
 public:
+    long long func(string word, int k) {
+
+    }
     long long countOfSubstrings(string word, int k) {
-        int i =0,j = 0;
-        int eNum = 0,fNum = 0;
-        int result = 0;
-        while(j<word.size()) {
-            char tmp = word[j];
-            if(st.find(tmp)!=st.end()) {
-                mp[tmp]++;
-                if(mp[tmp]==1) eNum++;
-            } else fNum++;
-
-            while(eNum==5&&fNum >= k&&i<=j) {
-                if(fNum == k) {
-                    result++;
-                }
-                char tmp1 = word[i];
-                if(st.find(tmp1)!=st.end()) {
-                    mp[tmp1]--;
-                    if(mp[tmp1]==0) eNum--;
-                } else fNum--;
-
-                i++;
-            }
-            j++;
-        }
-        return result;
+        return   func(word,k) - func(word,k+1);
     }
 
 private:
     set<char> st = {'a','e','i','o','u'};
-    unordered_map<char,int> mp;
+
 };
 // @lc code=end
 
