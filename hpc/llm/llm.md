@@ -54,7 +54,7 @@ _故本文将会通过具体的矩阵计算过程图来探究在Attention机制�
 
 ![](https://picx.zhimg.com/v2-39914384b022c7265f2ce8130370e597_r.jpg)
 
-（注意：变量h为多头注意力机制的头数。改图中h应该为2，虽然图中画了3层，那只是为了说明该矩阵是一个三维矩阵，并不代表其高h为3。并且作者规定：d\_model = d\_k \* h，后续会讲解为什么）
+（注意：变量h为多头注意力机制的头数。改图中h应该为2，虽然图中画了3层，那只是为了说明该矩阵是一个三维矩阵(因为d_model会被拆为头数对应的小立方嵌合体，即三维矩阵)，并不代表其高h为3。并且作者规定：d\_model = d\_k \* h，后续会讲解为什么）
 
 我们可以看到，整个流程被分为了几块：[Vocabulary Embedding](https://zhida.zhihu.com/search?content_id=249939627&content_type=Article&match_order=1&q=Vocabulary+Embedding&zhida_source=entity)词嵌入层、[Linear线性映射层](https://zhida.zhihu.com/search?content_id=249939627&content_type=Article&match_order=1&q=Linear%E7%BA%BF%E6%80%A7%E6%98%A0%E5%B0%84%E5%B1%82&zhida_source=entity)、[Scale-Dot-Product Attention](https://zhida.zhihu.com/search?content_id=249939627&content_type=Article&match_order=1&q=Scale-Dot-Product+Attention&zhida_source=entity) 缩放点乘注意力层。
 
@@ -72,7 +72,7 @@ _故本文将会通过具体的矩阵计算过程图来探究在Attention机制�
 
 我们可以看到，在计算的最后的**Concat**拼接操作，就是这个堆砌过程的逆过程。即把一个立方体在垂直方向切成二维切片，然后拼成一个长方体。
 
-最后，我们会发现，多头注意力机制相比普通的自主注意力机制，多了三个可学习的参数矩阵 W^Q、W^K、W^VW^Q、W^K、W^V 。这就是多头注意力机制的最终目的，使得我们的注意力相关过程可以学习、并且能够学习到不同特征。
+最后，我们会发现，多头注意力机制相比普通的自主注意力机制，多了三个可学习的参数矩阵  W^Q、 W^K 、W^V 。这就是多头注意力机制的最终目的，使得我们的注意力相关过程可以学习、并且能够学习到不同特征。
 
 需要注意：从图中可以得知，整个过程可学习的参数除了Embeddig的两个嵌入参数矩阵和三个多头映射矩阵W之外，还多了一个输出线性映射矩阵 W^OW^O 。它与上一节中词嵌入的输出矩阵 W^OW^O 不是一个东西，他的作用是进行等维的线性映射。实际在整个LLM推理之后，将输出转化为词嵌入的句子操作在本过程中并没有画出（篇幅源原因）。
 
