@@ -257,3 +257,5 @@ c++实现：NMS，conv2d，双线性插值，layernorm，单例模式
 
 ![](https://picx.zhimg.com/v2-7b6732d4e4100a54e10fc46f887b8bfc_l.jpg?source=f2fdee93)
 
+### 简历
+![alt text](images/image-7.png)
