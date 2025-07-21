@@ -41,9 +41,9 @@ cmodel的本质是**“用CPU代码模拟NPU硬件的计算行为”**，而“C
 用通用计算逻辑的“已知正确结果”，验证cmodel对NPU硬件计算行为的“模拟准确性”，同时确认推理框架将模型映射到NPU的逻辑是否正确。尽管cmodel运行在CPU上，但其模拟的是NPU的计算逻辑，与CPU原生推理的计算路径完全不同，因此对比具有明确的验证意义。
 
 ### 数据排布特性
-![alt text](image.png)
-![alt text](image-2.png)
-![alt text](image-1.png)
+![alt text](images/image.png)
+![alt text](images/image-2.png)
+![alt text](images/image-1.png)
 硬件排列格式
 #### nc1whc0
 ##### 理解 NCHW 到 NC₀HWC₁ 的排布转换
@@ -142,11 +142,11 @@ print("NC₀HWC₁ 内存布局:", tensor_nc0hwc1.flatten())
 
 #### bmn
 nchw -》 bm1
-![alt text](image-3.png)
-![alt text](image-4.png)
-![alt text](image-5.png)
+![alt text](images/image-3.png)
+![alt text](images/image-4.png)
+![alt text](images/image-5.png)
 中间结果支持硬件cast函数（子数normalize）
-![alt text](image-6.png)
+![alt text](images/image-6.png)
 
 fp16
 fp16 + 量化
