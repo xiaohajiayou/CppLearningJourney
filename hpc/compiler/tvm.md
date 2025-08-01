@@ -2,7 +2,7 @@
 https://www.paddlepaddle.org.cn/documentation/docs/zh/guides/paddle_v3_features/cinn_cn.html
 
 ### CINN 神经网络编译器
-
+paddle AI Comp CINN
 
 #### 一、概念简介[](# "此标题的永久链接")
 
@@ -416,6 +416,9 @@ function fn\_exp\_0\_subtract\_0\_infer\_shape (kernel\_args, kernel\_args\_num,
 
 图 4 部分重点模型单机 8 卡 FP16 训练性能对比数据
 
+
+## 昇腾
+https://www.hiascend.com/software/mindie
 
 ## pytorch中的动态图和静态图
 
